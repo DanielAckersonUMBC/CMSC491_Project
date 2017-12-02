@@ -1,0 +1,17 @@
+/* MaterialExtensions.ush */
+
+float3 Candle_Color(/*float3 normal, */float3 hot, float3 cool) {
+    //float3 camPos = ResolvedView.WorldCameraOrigin;
+    //float3 objPos = Primitive.ObjectWorldPositionAndRadius.xyz; 
+    //float3 objToCam = normalize(camPos - objPos);
+    //return 2 * lerp(cool, hot, dot(normal, objToCam));
+    return lerp(cool, hot, 0.5);
+}
+
+float3 Candle_Jiggle() {
+    float time = View.GameTime * 0.55;
+    float3 curl1 = MaterialExpressionVectorNoise(time, 1.0, 3.0, 0.0, 300.0).xyz;
+    float3 curl2 = MaterialExpressionVectorNoise(time - 0.001, 1.0, 3.0, 0.0, 300.0).xyz;
+    float3 offset = lerp(curl1, curl2, 0.5);
+    return offset * 0.25;
+}
