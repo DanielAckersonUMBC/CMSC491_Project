@@ -1,11 +1,10 @@
 /* MaterialExtensions.ush */
 
-float3 Candle_Color(/*float3 normal, */float3 hot, float3 cool) {
-    //float3 camPos = ResolvedView.WorldCameraOrigin;
-    //float3 objPos = Primitive.ObjectWorldPositionAndRadius.xyz; 
-    //float3 objToCam = normalize(camPos - objPos);
-    //return 2 * lerp(cool, hot, dot(normal, objToCam));
-    return lerp(cool, hot, 0.5);
+float3 Candle_Color(float3 normal, float3 hot, float3 cool) {
+    float3 camPos = ResolvedView.WorldCameraOrigin;
+    float3 objPos = Primitive.ObjectWorldPositionAndRadius.xyz; 
+    float3 objToCam = normalize(camPos - objPos);
+    return 2 * lerp(cool, hot, dot(normal, objToCam));
 }
 
 float3 Candle_Jiggle() {
